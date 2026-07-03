@@ -1,4 +1,3 @@
-ss
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,6 +7,8 @@ ss
 
 body {
     background-color: #fff5f5;
+    background-image: radial-gradient(#ffe3e3 1px, transparent 1px);
+    background-size: 20px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,36 +25,39 @@ body {
     text-align: center;
     width: 90%;
     max-width: 600px;
-    padding: 20px;
+    padding: 30px;
     background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(255, 107, 107, 0.15);
+    border: 2px dashed #ffb8b8;
 }
 
 .slide.active {
     display: flex;
-    animation: fadeIn 0.5s ease-in-out;
+    animation: bounceIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+@keyframes bounceIn {
+    from { opacity: 0; transform: scale(0.8) translateY(30px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 /* Typography & Layout elements */
 .title {
     color: #ff6b6b;
-    font-size: 2rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
+    text-shadow: 1px 1px 0px #fff;
 }
 
 .subtitle {
-    color: #888;
+    color: #777;
+    font-size: 1.05rem;
     margin-bottom: 30px;
 }
 
 .character-container {
-    margin: 20px 0;
+    margin: 15px 0;
 }
 
 .penguin-img {
@@ -61,31 +65,58 @@ body {
     height: auto;
 }
 
+/* Dynamic Bouncing effect for sad penguin */
+.dynamic-bounce {
+    animation: alternateBounce 0.5s infinite alternate ease-in-out;
+}
+@keyframes alternateBounce {
+    from { transform: translateY(0) rotate(180deg); }
+    to { transform: translateY(-15px) rotate(180deg); }
+}
+
 /* Buttons */
 .btn-group {
     display: flex;
     gap: 20px;
     margin-top: 20px;
+    min-height: 60px;
+    align-items: center;
 }
 
 .btn {
-    padding: 12px 35px;
+    padding: 14px 40px;
     font-size: 1.2rem;
     font-weight: bold;
     border: none;
     border-radius: 50px;
     cursor: pointer;
-    transition: transform 0.2s;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.1s, left 0.1s ease-out, top 0.1s ease-out;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
 .btn:active {
-    transform: scale(0.95);
+    transform: scale(0.9);
 }
 
-.yes-btn { background-color: #4cd137; color: white; }
-.no-btn { background-color: #ff4757; color: white; }
-.try-again-btn { background-color: #ff4757; color: white; }
+.yes-btn { 
+    background-color: #4cd137; 
+    color: white; 
+    font-size: 1.4rem;
+}
+.yes-btn:hover {
+    transform: scale(1.1);
+}
+
+.no-btn { 
+    background-color: #ff4757; 
+    color: white;
+    z-index: 999;
+}
+
+.try-again-btn { 
+    background: linear-gradient(135deg, #ff4757, #ff6b6b);
+    color: white; 
+}
 
 /* Penguin Selection Section */
 .penguin-selection {
@@ -93,86 +124,142 @@ body {
     justify-content: space-around;
     width: 100%;
     gap: 15px;
+    margin-top: 10px;
 }
 
 .penguin-choice {
     cursor: pointer;
-    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .penguin-choice:hover {
-    transform: translateY(-10px) scale(1.05);
+    transform: translateY(-15px) scale(1.1);
 }
 
 .penguin-choice img {
-    width: 100px;
+    width: 110px;
     height: auto;
+    filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1));
+}
+
+.pengu-label {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #ff6b6b;
+    font-weight: bold;
+    background: #fff0f0;
+    padding: 3px 10px;
+    border-radius: 20px;
 }
 
 /* Card layout for letter */
 .grid-layout {
     display: flex;
-    gap: 20px;
+    gap: 25px;
     align-items: center;
     text-align: left;
-    padding: 10px;
+    padding: 15px;
 }
 
 .photo-frame {
     background: #fff;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 12px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     text-align: center;
+    transform: rotate(-3deg);
+    transition: transform 0.3s;
+}
+.photo-frame:hover {
+    transform: rotate(0deg) scale(1.05);
 }
 
 .profile-pic {
-    width: 130px;
-    border-radius: 8px;
+    width: 140px;
+    border-radius: 12px;
 }
 
-.letter-text h2 { color: #ff6b6b; margin-bottom: 10px;}
-.letter-text p { font-size: 0.9rem; color: #555; line-height: 1.4; margin-bottom: 5px;}
+.caption {
+    margin-top: 5px;
+    font-weight: bold;
+    color: #ff6b6b;
+}
+
+.letter-text h2 { color: #ff6b6b; margin-bottom: 12px; font-size: 1.6rem;}
+.letter-text p { font-size: 0.95rem; color: #444; line-height: 1.5; margin-bottom: 8px;}
 
 /* Collage Gallery */
 .gallery-grid {
     position: relative;
-    width: 300px;
-    height: 300px;
-    margin: 20px auto;
+    width: 320px;
+    height: 320px;
+    margin: 10px auto;
 }
 
 .heart-img {
     border-radius: 50%;
-    border: 3px solid white;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    border: 4px solid white;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
     position: absolute;
     object-fit: cover;
+    transition: transform 0.3s;
+}
+.heart-img:hover {
+    transform: scale(1.1);
+    z-index: 5;
 }
 
-.center-item { width: 120px; height: 120px; top: 90px; left: 90px; z-index: 2; border-radius: 15px;}
-.item1 { width: 70px; height: 70px; top: 20px; left: 30px; }
-.item2 { width: 70px; height: 70px; top: 20px; right: 30px; }
-.item3 { width: 70px; height: 70px; bottom: 20px; left: 30px; }
-.item4 { width: 70px; height: 70px; bottom: 20px; right: 30px; }
+.center-item { width: 130px; height: 130px; top: 95px; left: 95px; z-index: 2; border-radius: 20px;}
+.item1 { width: 80px; height: 80px; top: 15px; left: 25px; }
+.item2 { width: 80px; height: 80px; top: 15px; right: 25px; }
+.item3 { width: 80px; height: 80px; bottom: 15px; left: 25px; }
+.item4 { width: 80px; height: 80px; bottom: 15px; right: 25px; }
 
-.sub-message { margin-top: 15px; color: #333;}
-.date { font-size: 0.8rem; color: #888; }
+.pulse-animation {
+    animation: heartThrob 0.8s infinite alternate ease-in-out;
+}
+@keyframes heartThrob {
+    from { transform: scale(1); }
+    to { transform: scale(1.06); }
+}
+
+.sub-message { margin-top: 20px; color: #333; font-size: 1.3rem;}
+.date { font-size: 0.85rem; color: #aaa; }
 
 /* Utility back button */
 .btn-back {
-    margin-top: 20px;
+    margin-top: 25px;
     background: none;
     border: none;
-    color: #888;
+    color: #aaa;
+    font-size: 0.9rem;
     cursor: pointer;
     text-decoration: underline;
+    transition: color 0.2s;
+}
+.btn-back:hover {
+    color: #ff6b6b;
 }
 
+/* Magic Rainbow Text Effects */
 .huge-text {
-    font-size: 2.5rem;
-    color: #ff4757;
-    margin-top: 10px;
-    letter-spacing: 2px;
+    font-size: 2.8rem;
+    margin-top: 15px;
+    letter-spacing: 3px;
 }
-.hug-gif { width: 180px; }
+
+.rainbow-text {
+    background-image: linear-gradient(to left, #ff4757, #ff6b6b, #ff7f50, #ff4757);
+    animation: rainbow-shift 3s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes rainbow-shift {
+    to { background-position: 400% 0; }
+}
+
+.hug-gif { width: 200px; }
